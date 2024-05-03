@@ -1,0 +1,22 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: app-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: app-job
+        image: google/cloud-sdk:alpine
+        command: ["/bin/sh", "-c", "tail -f /mnt/storage/logging.log"]
+        volumeMounts:
+        - name: data-input
+          mountPath: "/mnt/storage"
+      restartPolicy: Never
+      volumes:
+      - name: data-input
+        gcePersistentDisk:
+          pdName: glow-data-disk-200
+          fsType: ext4
+  backoffLimit: 0

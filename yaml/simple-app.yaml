@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: demo
+  labels:
+    app: demo
+spec:
+  containers:
+  - name: demo
+    image: gcr.io/stable-vista-418814/mock_webserver:2.0.0
+    ports:
+    - name: http
+      containerPort: 8080

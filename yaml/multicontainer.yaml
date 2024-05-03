@@ -1,0 +1,22 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hello-kubernetes
+spec:
+  containers:
+  - name: nginx-container-1
+    image: nginx
+    volumeMounts:
+    - name: www
+      mountPath: /usr/share/nginx/html
+  - name: nginx-container-2
+    image: nginx
+    volumeMounts:
+    - name: www
+      mountPath: /usr/share/nginx/html
+  volumes:
+  - name: www
+    hostPath:
+      path: /var/www
+      type: DirectoryOrCreate
